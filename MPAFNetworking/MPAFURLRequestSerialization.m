@@ -62,7 +62,8 @@ static NSString * mp_AFBase64EncodedStringFromString(NSString *string) {
 }
 
 static NSString * const MPkAFCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 static NSString * mp_AFPercentEscapedQueryStringKeyFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
     static NSString * const MPkAFCharactersToLeaveUnescapedInQueryStringPairKey = @"[].";
 
@@ -72,7 +73,7 @@ static NSString * mp_AFPercentEscapedQueryStringKeyFromStringWithEncoding(NSStri
 static NSString * mp_AFPercentEscapedQueryStringValueFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
 	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, NULL, (__bridge CFStringRef)MPkAFCharactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
 }
-
+#pragma clang diagnostic pop
 #pragma mark -
 
 @interface MPAFQueryStringPair : NSObject
